@@ -23,15 +23,6 @@ plugins {
 group 'com.github.ltttttttttttt'
 version '1.0.0'
 
-task sourcesJar(type: Jar) {
-    from java.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-artifacts {
-    archives sourcesJar
-}
-
 publishing {
     publications {
         maven(MavenPublication) {
@@ -40,6 +31,12 @@ publishing {
             artifactId = 'library'
             version = '1.0.0'
         }
+    }
+}
+
+sourceSets {
+    main {
+        java.srcDirs(project.rootDir.absolutePath + "/data_structure/src/main/java")
     }
 }
 
