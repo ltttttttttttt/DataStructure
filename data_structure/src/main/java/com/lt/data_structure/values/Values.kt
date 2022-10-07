@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lt.data_structure.pair
+package com.lt.data_structure.values
 
 /**
  * creator: lt  2021/3/6  lt.dygzs@qq.com

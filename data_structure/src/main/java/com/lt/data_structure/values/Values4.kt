@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.lt.data_structure.pair
+package com.lt.data_structure.values
 
 /**
  * creator: lt  2021/3/6  lt.dygzs@qq.com
  * effect : Pair升级款
  * warning:
  */
-data class Values5<T1, T2, T3, T4, T5>(
+data class Values4<T1, T2, T3, T4>(
     val t1: T1,
     val t2: T2,
     val t3: T3,
     val t4: T4,
-    val t5: T5,
 )

@@ -35,3 +35,41 @@ dependencies {
     implementation("com.github.ltttttttttttt:DataStructure:$version")//this, such as 1.0.0
 }
 ```
+
+## 可自动扩容的基础数据数组,参考ArrayList<T>,但使用不会自动拆装箱,提升性能
+
+```kotlin
+IntArrayList
+LongArrayList
+FloatArrayList
+DoubleArrayList
+BooleanArrayList
+```
+
+## LRU算法的map
+
+```kotlin
+LruMap
+LruMapWithGetFirst
+```
+
+## 排序且去重的List
+
+```kotlin
+SortedAndNotRepeatList
+```
+
+## 会根据倒计时自动移除数据的map
+
+```kotlin
+DownTimeMap
+```
+
+## kotlin的Pair数量不够用怎么办?用下面的
+
+```kotlin
+typealias Values2 = Pair
+typealias Values3 = Triple
+Values4
+Values5
+```
