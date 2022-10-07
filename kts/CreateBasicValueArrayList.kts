@@ -32,7 +32,7 @@ val basicValues = listOf(
 )
 
 //生成文件的目录
-val cacheDir = File("../../../../build/cache")
+val cacheDir = File("../data_structure/build/cache")
 if (!cacheDir.isDirectory) {
     cacheDir.mkdirs()
 }
