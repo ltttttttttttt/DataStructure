@@ -34,10 +34,9 @@ publishing {
     }
 }
 
-sourceSets {
-    main {
-        java.srcDirs(project.rootDir.absolutePath + "/data_structure/src/main/java")
-    }
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 repositories {
