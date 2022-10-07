@@ -32,7 +32,7 @@ version
 ```kotlin
 dependencies {
     ...
-    implementation("com.github.ltttttttttttt:DataStructure:$version")//this, such as 1.0.0
+    implementation("com.github.ltttttttttttt:DataStructure:$version")//this, such as 1.0.3
 }
 ```
 
