@@ -57,7 +57,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
     file.writeText(
         "package com.lt.data_structure.basic_value\n" +
                 "\n" +
-                "private typealias Basics${basic} = ${basic}\n" +
+                "private typealias Basic${basic} = ${basic}\n" +
                 "\n" +
                 "/**\n" +
                 " * creator: lt  2021/11/10  lt.dygzs@qq.com\n" +
@@ -73,7 +73,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "\n" +
                 "    constructor(${lowerBasic}ArrayList: ${basic}ArrayList) : this(${lowerBasic}ArrayList.data.copyOf(${lowerBasic}ArrayList.size))\n" +
                 "\n" +
-                "    constructor(list: Collection<Basics${basic}>) : this(list.size) {\n" +
+                "    constructor(list: Collection<Basic${basic}>) : this(list.size) {\n" +
                 "        list.forEach(::add)\n" +
                 "    }\n" +
                 "\n" +
@@ -89,7 +89,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 获取数据\n" +
                 "     */\n" +
-                "    operator fun get(index: Int): Basics${basic} {\n" +
+                "    operator fun get(index: Int): Basic${basic} {\n" +
                 "        if (index >= size)\n" +
                 "            throw IndexOutOfBoundsException(\"size = \$size ,the index = \$index\")\n" +
                 "        return data[index]\n" +
@@ -98,13 +98,13 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 获取数据,如果索引越界,就返回else的返回值\n" +
                 "     */\n" +
-                "    inline fun getOrElse(index: Int, defaultValue: () -> Basics${basic}): Basics${basic} {\n" +
+                "    inline fun getOrElse(index: Int, defaultValue: () -> Basic${basic}): Basic${basic} {\n" +
                 "        if (index !in 0 until size)\n" +
                 "            return defaultValue()\n" +
                 "        return get(index)\n" +
                 "    }\n" +
                 "\n" +
-                "    fun getOrElse(index: Int, defaultValue: Basics${basic}): Basics${basic} {\n" +
+                "    fun getOrElse(index: Int, defaultValue: Basic${basic}): Basic${basic} {\n" +
                 "        if (index !in 0 until size)\n" +
                 "            return defaultValue\n" +
                 "        return get(index)\n" +
@@ -113,7 +113,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 获取数据,如果索引越界,就返回null\n" +
                 "     */\n" +
-                "    fun getOrNull(index: Int): Basics${basic}? {\n" +
+                "    fun getOrNull(index: Int): Basic${basic}? {\n" +
                 "        if (index !in 0 until size)\n" +
                 "            return null\n" +
                 "        return get(index)\n" +
@@ -123,7 +123,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "     * 添加数据\n" +
                 "     * 扩容机制:容量翻倍\n" +
                 "     */\n" +
-                "    fun add(element: Basics${basic}) {\n" +
+                "    fun add(element: Basic${basic}) {\n" +
                 "        if (size == data.size)\n" +
                 "            data = data.copyOf(data.size * 2)\n" +
                 "        data[size] = element\n" +
@@ -133,7 +133,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 根据数据移除\n" +
                 "     */\n" +
-                "    fun removeElement(element: Basics${basic}) {\n" +
+                "    fun removeElement(element: Basic${basic}) {\n" +
                 "        val indexOf = indexOf(element)\n" +
                 "        if (indexOf >= 0) {\n" +
                 "            removeAtIndex(indexOf)\n" +
@@ -165,7 +165,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 设置某个索引的数据\n" +
                 "     */\n" +
-                "    operator fun set(index: Int, element: Basics${basic}): Basics${basic} {\n" +
+                "    operator fun set(index: Int, element: Basic${basic}): Basic${basic} {\n" +
                 "        if (index >= size)\n" +
                 "            throw IndexOutOfBoundsException(\"size = \$size ,the index = \$index\")\n" +
                 "        val oldElement = get(index)\n" +
@@ -176,7 +176,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 如果[index]没有超过size就设置,否则丢弃该次修改\n" +
                 "     */\n" +
-                "    fun setOrDiscard(index: Int, element: Basics${basic}) {\n" +
+                "    fun setOrDiscard(index: Int, element: Basic${basic}) {\n" +
                 "        if (index >= size || index < 0) return\n" +
                 "        set(index, element)\n" +
                 "    }\n" +
@@ -189,7 +189,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 获取对应数据的索引,如果没有则返回-1\n" +
                 "     */\n" +
-                "    fun indexOf(element: Basics${basic}): Int {\n" +
+                "    fun indexOf(element: Basic${basic}): Int {\n" +
                 "        forEachIndexed { index, datum ->\n" +
                 "            if (element == datum)\n" +
                 "                return index\n" +
@@ -200,7 +200,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 从后往前获取对应数据的索引,如果没有则返回-1\n" +
                 "     */\n" +
-                "    fun lastIndexOf(element: Basics${basic}): Int {\n" +
+                "    fun lastIndexOf(element: Basic${basic}): Int {\n" +
                 "        forEachReversedIndexed { index, datum ->\n" +
                 "            if (element == datum)\n" +
                 "                return index\n" +
@@ -211,27 +211,27 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 获取是否存在对应数据\n" +
                 "     */\n" +
-                "    operator fun contains(element: Basics${basic}): Boolean = indexOf(element) >= 0\n" +
+                "    operator fun contains(element: Basic${basic}): Boolean = indexOf(element) >= 0\n" +
                 "\n" +
                 "    /**\n" +
-                "     * 获取迭代器\n" +
+                "     * 获取包装类型迭代器\n" +
                 "     */\n" +
-                "    operator fun iterator(): MutableIterator<Basics${basic}> = object : MutableIterator<Basics${basic}> {\n" +
-                "        private var index = 0\n" +
-                "        override fun hasNext(): Boolean = size > index\n" +
-                "        override fun next(): Basics${basic} = get(index++)\n" +
-                "        override fun remove() = removeAtIndex(--index)\n" +
-                "    }\n" +
+                "    operator fun iterator(): ${basic}MutableIterator = ${basic}MutableIterator()\n" +
                 "\n" +
                 "    /**\n" +
-                "     * 遍历的方法\n" +
+                "     * 获取基础类型迭代器,相对于[iterator]方法,效率更高\n" +
+                "     */\n" +
+                "    fun iteratorWithBasic(): Basic${basic}MutableIterator = Basic${basic}MutableIterator()\n" +
+                "\n" +
+                "    /**\n" +
+                "     * 遍历的方法,inline后是基础类型,如果无法inline,则使用[forEachWithBasic]系列方法\n" +
                 "     * ps:使用forEach系列比for性能好(因为迭代器的next()返回的是对象)\n" +
                 "     */\n" +
-                "    inline fun forEach(action: (element: Basics${basic}) -> Unit) {\n" +
+                "    inline fun forEach(action: (element: Basic${basic}) -> Unit) {\n" +
                 "        forEachIndexed { _, element -> action(element) }\n" +
                 "    }\n" +
                 "\n" +
-                "    inline fun forEachIndexed(action: (index: Int, element: Basics${basic}) -> Unit) {\n" +
+                "    inline fun forEachIndexed(action: (index: Int, element: Basic${basic}) -> Unit) {\n" +
                 "        var index = 0\n" +
                 "        while (index < size) {\n" +
                 "            action(index, get(index))\n" +
@@ -242,10 +242,40 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 倒序遍历\n" +
                 "     */\n" +
-                "    inline fun forEachReversedIndexed(action: (index: Int, element: Basics${basic}) -> Unit) {\n" +
+                "    inline fun forEachReversedIndexed(action: (index: Int, element: Basic${basic}) -> Unit) {\n" +
                 "        var index = size - 1\n" +
                 "        while (index >= 0) {\n" +
                 "            action(index, get(index))\n" +
+                "            index--\n" +
+                "        }\n" +
+                "    }\n" +
+                "\n" +
+                "    /**\n" +
+                "     * 基础类型遍历方法(适用于无法kotlin inline的情况)\n" +
+                "     */\n" +
+                "    fun forEachWithBasic(action: OnBasic${basic}) {\n" +
+                "        var index = 0\n" +
+                "        while (index < size) {\n" +
+                "            action.onBasic${basic}(get(index))\n" +
+                "            index++\n" +
+                "        }\n" +
+                "    }\n" +
+                "\n" +
+                "    fun forEachIndexedWithBasic(action: OnBasic${basic}WithIndex) {\n" +
+                "        var index = 0\n" +
+                "        while (index < size) {\n" +
+                "            action.onBasic${basic}WithIndex(index, get(index))\n" +
+                "            index++\n" +
+                "        }\n" +
+                "    }\n" +
+                "\n" +
+                "    /**\n" +
+                "     * 倒序遍历\n" +
+                "     */\n" +
+                "    fun forEachReversedIndexedWithBasic(action: OnBasic${basic}WithIndex) {\n" +
+                "        var index = size - 1\n" +
+                "        while (index >= 0) {\n" +
+                "            action.onBasic${basic}WithIndex(index, get(index))\n" +
                 "            index--\n" +
                 "        }\n" +
                 "    }\n" +
@@ -268,7 +298,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 批量添加数据\n" +
                 "     */\n" +
-                "    fun addAll(elements: Collection<Basics${basic}>) {\n" +
+                "    fun addAll(elements: Collection<Basic${basic}>) {\n" +
                 "        elements.forEach(::add)\n" +
                 "    }\n" +
                 "\n" +
@@ -280,7 +310,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "        elements.forEach(::add)\n" +
                 "    }\n" +
                 "\n" +
-                "    fun addAllNotNull(elements: Collection<Basics${basic}?>?) {\n" +
+                "    fun addAllNotNull(elements: Collection<Basic${basic}?>?) {\n" +
                 "        elements?.forEach {\n" +
                 "            if (it != null)\n" +
                 "                add(it)\n" +
@@ -290,7 +320,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    /**\n" +
                 "     * 批量移除数据\n" +
                 "     */\n" +
-                "    fun removeAll(elements: Collection<Basics${basic}>) {\n" +
+                "    fun removeAll(elements: Collection<Basic${basic}>) {\n" +
                 "        elements.forEach(::removeElement)\n" +
                 "    }\n" +
                 "\n" +
@@ -319,8 +349,39 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "    override fun toString(): String {\n" +
                 "        return \"[\" + to${basic}Array().joinToString(\",\") + \"]\"\n" +
                 "    }\n" +
+                "\n" +
+                "    /**\n" +
+                "     * 包装类型迭代器\n" +
+                "     */\n" +
+                "    inner class ${basic}MutableIterator : MutableIterator<Basic${basic}> {\n" +
+                "        private var index = 0\n" +
+                "        override fun hasNext(): Boolean = size > index\n" +
+                "        override fun next(): Basic${basic} = get(index++)\n" +
+                "        override fun remove() = removeAtIndex(--index)\n" +
+                "    }\n" +
+                "\n" +
+                "    /**\n" +
+                "     * 基础类型迭代器\n" +
+                "     */\n" +
+                "    inner class Basic${basic}MutableIterator {\n" +
+                "        private var index = 0\n" +
+                "        fun hasNext(): Boolean = size > index\n" +
+                "        fun next(): Basic${basic} = get(index++)\n" +
+                "        fun remove() = removeAtIndex(--index)\n" +
+                "    }\n" +
+                "\n" +
+                "    /**\n" +
+                "     * 基础类型的lambda\n" +
+                "     */\n" +
+                "    fun interface OnBasic${basic} {\n" +
+                "        fun onBasic${basic}(basic${basic}: Basic${basic})\n" +
+                "    }\n" +
+                "\n" +
+                "    fun interface OnBasic${basic}WithIndex {\n" +
+                "        fun onBasic${basic}WithIndex(index: Int, basic${basic}: Basic${basic})\n" +
+                "    }\n" +
                 "}\n" +
                 "\n" +
-                "fun ${lowerBasic}ArrayListOf(vararg elements: Basics${basic}): ${basic}ArrayList = ${basic}ArrayList(elements)"
+                "fun ${lowerBasic}ArrayListOf(vararg elements: Basic${basic}): ${basic}ArrayList = ${basic}ArrayList(elements)"
     )
 }

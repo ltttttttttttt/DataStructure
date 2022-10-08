@@ -16,7 +16,7 @@
 
 package com.lt.data_structure.basic_value
 
-private typealias BasicsBoolean = Boolean
+private typealias BasicBoolean = Boolean
 
 /**
  * creator: lt  2021/11/10  lt.dygzs@qq.com
@@ -32,7 +32,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
 
     constructor(booleanArrayList: BooleanArrayList) : this(booleanArrayList.data.copyOf(booleanArrayList.size))
 
-    constructor(list: Collection<BasicsBoolean>) : this(list.size) {
+    constructor(list: Collection<BasicBoolean>) : this(list.size) {
         list.forEach(::add)
     }
 
@@ -48,7 +48,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 获取数据
      */
-    operator fun get(index: Int): BasicsBoolean {
+    operator fun get(index: Int): BasicBoolean {
         if (index >= size)
             throw IndexOutOfBoundsException("size = $size ,the index = $index")
         return data[index]
@@ -57,13 +57,13 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 获取数据,如果索引越界,就返回else的返回值
      */
-    inline fun getOrElse(index: Int, defaultValue: () -> BasicsBoolean): BasicsBoolean {
+    inline fun getOrElse(index: Int, defaultValue: () -> BasicBoolean): BasicBoolean {
         if (index !in 0 until size)
             return defaultValue()
         return get(index)
     }
 
-    fun getOrElse(index: Int, defaultValue: BasicsBoolean): BasicsBoolean {
+    fun getOrElse(index: Int, defaultValue: BasicBoolean): BasicBoolean {
         if (index !in 0 until size)
             return defaultValue
         return get(index)
@@ -72,7 +72,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 获取数据,如果索引越界,就返回null
      */
-    fun getOrNull(index: Int): BasicsBoolean? {
+    fun getOrNull(index: Int): BasicBoolean? {
         if (index !in 0 until size)
             return null
         return get(index)
@@ -82,7 +82,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
      * 添加数据
      * 扩容机制:容量翻倍
      */
-    fun add(element: BasicsBoolean) {
+    fun add(element: BasicBoolean) {
         if (size == data.size)
             data = data.copyOf(data.size * 2)
         data[size] = element
@@ -92,7 +92,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 根据数据移除
      */
-    fun removeElement(element: BasicsBoolean) {
+    fun removeElement(element: BasicBoolean) {
         val indexOf = indexOf(element)
         if (indexOf >= 0) {
             removeAtIndex(indexOf)
@@ -124,7 +124,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 设置某个索引的数据
      */
-    operator fun set(index: Int, element: BasicsBoolean): BasicsBoolean {
+    operator fun set(index: Int, element: BasicBoolean): BasicBoolean {
         if (index >= size)
             throw IndexOutOfBoundsException("size = $size ,the index = $index")
         val oldElement = get(index)
@@ -135,7 +135,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 如果[index]没有超过size就设置,否则丢弃该次修改
      */
-    fun setOrDiscard(index: Int, element: BasicsBoolean) {
+    fun setOrDiscard(index: Int, element: BasicBoolean) {
         if (index >= size || index < 0) return
         set(index, element)
     }
@@ -148,7 +148,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 获取对应数据的索引,如果没有则返回-1
      */
-    fun indexOf(element: BasicsBoolean): Int {
+    fun indexOf(element: BasicBoolean): Int {
         forEachIndexed { index, datum ->
             if (element == datum)
                 return index
@@ -159,7 +159,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 从后往前获取对应数据的索引,如果没有则返回-1
      */
-    fun lastIndexOf(element: BasicsBoolean): Int {
+    fun lastIndexOf(element: BasicBoolean): Int {
         forEachReversedIndexed { index, datum ->
             if (element == datum)
                 return index
@@ -170,27 +170,27 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 获取是否存在对应数据
      */
-    operator fun contains(element: BasicsBoolean): Boolean = indexOf(element) >= 0
+    operator fun contains(element: BasicBoolean): Boolean = indexOf(element) >= 0
 
     /**
-     * 获取迭代器
+     * 获取包装类型迭代器
      */
-    operator fun iterator(): MutableIterator<BasicsBoolean> = object : MutableIterator<BasicsBoolean> {
-        private var index = 0
-        override fun hasNext(): Boolean = size > index
-        override fun next(): BasicsBoolean = get(index++)
-        override fun remove() = removeAtIndex(--index)
-    }
+    operator fun iterator(): BooleanMutableIterator = BooleanMutableIterator()
 
     /**
-     * 遍历的方法
+     * 获取基础类型迭代器,相对于[iterator]方法,效率更高
+     */
+    fun iteratorWithBasic(): BasicBooleanMutableIterator = BasicBooleanMutableIterator()
+
+    /**
+     * 遍历的方法,inline后是基础类型,如果无法inline,则使用[forEachWithBasic]系列方法
      * ps:使用forEach系列比for性能好(因为迭代器的next()返回的是对象)
      */
-    inline fun forEach(action: (element: BasicsBoolean) -> Unit) {
+    inline fun forEach(action: (element: BasicBoolean) -> Unit) {
         forEachIndexed { _, element -> action(element) }
     }
 
-    inline fun forEachIndexed(action: (index: Int, element: BasicsBoolean) -> Unit) {
+    inline fun forEachIndexed(action: (index: Int, element: BasicBoolean) -> Unit) {
         var index = 0
         while (index < size) {
             action(index, get(index))
@@ -201,10 +201,40 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 倒序遍历
      */
-    inline fun forEachReversedIndexed(action: (index: Int, element: BasicsBoolean) -> Unit) {
+    inline fun forEachReversedIndexed(action: (index: Int, element: BasicBoolean) -> Unit) {
         var index = size - 1
         while (index >= 0) {
             action(index, get(index))
+            index--
+        }
+    }
+
+    /**
+     * 基础类型遍历方法(适用于无法kotlin inline的情况)
+     */
+    fun forEachWithBasic(action: OnBasicBoolean) {
+        var index = 0
+        while (index < size) {
+            action.onBasicBoolean(get(index))
+            index++
+        }
+    }
+
+    fun forEachIndexedWithBasic(action: OnBasicBooleanWithIndex) {
+        var index = 0
+        while (index < size) {
+            action.onBasicBooleanWithIndex(index, get(index))
+            index++
+        }
+    }
+
+    /**
+     * 倒序遍历
+     */
+    fun forEachReversedIndexedWithBasic(action: OnBasicBooleanWithIndex) {
+        var index = size - 1
+        while (index >= 0) {
+            action.onBasicBooleanWithIndex(index, get(index))
             index--
         }
     }
@@ -227,7 +257,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 批量添加数据
      */
-    fun addAll(elements: Collection<BasicsBoolean>) {
+    fun addAll(elements: Collection<BasicBoolean>) {
         elements.forEach(::add)
     }
 
@@ -239,7 +269,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
         elements.forEach(::add)
     }
 
-    fun addAllNotNull(elements: Collection<BasicsBoolean?>?) {
+    fun addAllNotNull(elements: Collection<BasicBoolean?>?) {
         elements?.forEach {
             if (it != null)
                 add(it)
@@ -249,7 +279,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 批量移除数据
      */
-    fun removeAll(elements: Collection<BasicsBoolean>) {
+    fun removeAll(elements: Collection<BasicBoolean>) {
         elements.forEach(::removeElement)
     }
 
@@ -278,6 +308,37 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
     override fun toString(): String {
         return "[" + toBooleanArray().joinToString(",") + "]"
     }
+
+    /**
+     * 包装类型迭代器
+     */
+    inner class BooleanMutableIterator : MutableIterator<BasicBoolean> {
+        private var index = 0
+        override fun hasNext(): Boolean = size > index
+        override fun next(): BasicBoolean = get(index++)
+        override fun remove() = removeAtIndex(--index)
+    }
+
+    /**
+     * 基础类型迭代器
+     */
+    inner class BasicBooleanMutableIterator {
+        private var index = 0
+        fun hasNext(): Boolean = size > index
+        fun next(): BasicBoolean = get(index++)
+        fun remove() = removeAtIndex(--index)
+    }
+
+    /**
+     * 基础类型的lambda
+     */
+    fun interface OnBasicBoolean {
+        fun onBasicBoolean(basicBoolean: BasicBoolean)
+    }
+
+    fun interface OnBasicBooleanWithIndex {
+        fun onBasicBooleanWithIndex(index: Int, basicBoolean: BasicBoolean)
+    }
 }
 
-fun booleanArrayListOf(vararg elements: BasicsBoolean): BooleanArrayList = BooleanArrayList(elements)
+fun booleanArrayListOf(vararg elements: BasicBoolean): BooleanArrayList = BooleanArrayList(elements)

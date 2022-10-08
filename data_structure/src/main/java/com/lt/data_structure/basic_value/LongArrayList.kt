@@ -16,7 +16,7 @@
 
 package com.lt.data_structure.basic_value
 
-private typealias BasicsLong = Long
+private typealias BasicLong = Long
 
 /**
  * creator: lt  2021/11/10  lt.dygzs@qq.com
@@ -32,7 +32,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
 
     constructor(longArrayList: LongArrayList) : this(longArrayList.data.copyOf(longArrayList.size))
 
-    constructor(list: Collection<BasicsLong>) : this(list.size) {
+    constructor(list: Collection<BasicLong>) : this(list.size) {
         list.forEach(::add)
     }
 
@@ -48,7 +48,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 获取数据
      */
-    operator fun get(index: Int): BasicsLong {
+    operator fun get(index: Int): BasicLong {
         if (index >= size)
             throw IndexOutOfBoundsException("size = $size ,the index = $index")
         return data[index]
@@ -57,13 +57,13 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 获取数据,如果索引越界,就返回else的返回值
      */
-    inline fun getOrElse(index: Int, defaultValue: () -> BasicsLong): BasicsLong {
+    inline fun getOrElse(index: Int, defaultValue: () -> BasicLong): BasicLong {
         if (index !in 0 until size)
             return defaultValue()
         return get(index)
     }
 
-    fun getOrElse(index: Int, defaultValue: BasicsLong): BasicsLong {
+    fun getOrElse(index: Int, defaultValue: BasicLong): BasicLong {
         if (index !in 0 until size)
             return defaultValue
         return get(index)
@@ -72,7 +72,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 获取数据,如果索引越界,就返回null
      */
-    fun getOrNull(index: Int): BasicsLong? {
+    fun getOrNull(index: Int): BasicLong? {
         if (index !in 0 until size)
             return null
         return get(index)
@@ -82,7 +82,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
      * 添加数据
      * 扩容机制:容量翻倍
      */
-    fun add(element: BasicsLong) {
+    fun add(element: BasicLong) {
         if (size == data.size)
             data = data.copyOf(data.size * 2)
         data[size] = element
@@ -92,7 +92,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 根据数据移除
      */
-    fun removeElement(element: BasicsLong) {
+    fun removeElement(element: BasicLong) {
         val indexOf = indexOf(element)
         if (indexOf >= 0) {
             removeAtIndex(indexOf)
@@ -124,7 +124,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 设置某个索引的数据
      */
-    operator fun set(index: Int, element: BasicsLong): BasicsLong {
+    operator fun set(index: Int, element: BasicLong): BasicLong {
         if (index >= size)
             throw IndexOutOfBoundsException("size = $size ,the index = $index")
         val oldElement = get(index)
@@ -135,7 +135,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 如果[index]没有超过size就设置,否则丢弃该次修改
      */
-    fun setOrDiscard(index: Int, element: BasicsLong) {
+    fun setOrDiscard(index: Int, element: BasicLong) {
         if (index >= size || index < 0) return
         set(index, element)
     }
@@ -148,7 +148,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 获取对应数据的索引,如果没有则返回-1
      */
-    fun indexOf(element: BasicsLong): Int {
+    fun indexOf(element: BasicLong): Int {
         forEachIndexed { index, datum ->
             if (element == datum)
                 return index
@@ -159,7 +159,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 从后往前获取对应数据的索引,如果没有则返回-1
      */
-    fun lastIndexOf(element: BasicsLong): Int {
+    fun lastIndexOf(element: BasicLong): Int {
         forEachReversedIndexed { index, datum ->
             if (element == datum)
                 return index
@@ -170,27 +170,27 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 获取是否存在对应数据
      */
-    operator fun contains(element: BasicsLong): Boolean = indexOf(element) >= 0
+    operator fun contains(element: BasicLong): Boolean = indexOf(element) >= 0
 
     /**
-     * 获取迭代器
+     * 获取包装类型迭代器
      */
-    operator fun iterator(): MutableIterator<BasicsLong> = object : MutableIterator<BasicsLong> {
-        private var index = 0
-        override fun hasNext(): Boolean = size > index
-        override fun next(): BasicsLong = get(index++)
-        override fun remove() = removeAtIndex(--index)
-    }
+    operator fun iterator(): LongMutableIterator = LongMutableIterator()
 
     /**
-     * 遍历的方法
+     * 获取基础类型迭代器,相对于[iterator]方法,效率更高
+     */
+    fun iteratorWithBasic(): BasicLongMutableIterator = BasicLongMutableIterator()
+
+    /**
+     * 遍历的方法,inline后是基础类型,如果无法inline,则使用[forEachWithBasic]系列方法
      * ps:使用forEach系列比for性能好(因为迭代器的next()返回的是对象)
      */
-    inline fun forEach(action: (element: BasicsLong) -> Unit) {
+    inline fun forEach(action: (element: BasicLong) -> Unit) {
         forEachIndexed { _, element -> action(element) }
     }
 
-    inline fun forEachIndexed(action: (index: Int, element: BasicsLong) -> Unit) {
+    inline fun forEachIndexed(action: (index: Int, element: BasicLong) -> Unit) {
         var index = 0
         while (index < size) {
             action(index, get(index))
@@ -201,10 +201,40 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 倒序遍历
      */
-    inline fun forEachReversedIndexed(action: (index: Int, element: BasicsLong) -> Unit) {
+    inline fun forEachReversedIndexed(action: (index: Int, element: BasicLong) -> Unit) {
         var index = size - 1
         while (index >= 0) {
             action(index, get(index))
+            index--
+        }
+    }
+
+    /**
+     * 基础类型遍历方法(适用于无法kotlin inline的情况)
+     */
+    fun forEachWithBasic(action: OnBasicLong) {
+        var index = 0
+        while (index < size) {
+            action.onBasicLong(get(index))
+            index++
+        }
+    }
+
+    fun forEachIndexedWithBasic(action: OnBasicLongWithIndex) {
+        var index = 0
+        while (index < size) {
+            action.onBasicLongWithIndex(index, get(index))
+            index++
+        }
+    }
+
+    /**
+     * 倒序遍历
+     */
+    fun forEachReversedIndexedWithBasic(action: OnBasicLongWithIndex) {
+        var index = size - 1
+        while (index >= 0) {
+            action.onBasicLongWithIndex(index, get(index))
             index--
         }
     }
@@ -227,7 +257,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 批量添加数据
      */
-    fun addAll(elements: Collection<BasicsLong>) {
+    fun addAll(elements: Collection<BasicLong>) {
         elements.forEach(::add)
     }
 
@@ -239,7 +269,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
         elements.forEach(::add)
     }
 
-    fun addAllNotNull(elements: Collection<BasicsLong?>?) {
+    fun addAllNotNull(elements: Collection<BasicLong?>?) {
         elements?.forEach {
             if (it != null)
                 add(it)
@@ -249,7 +279,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     /**
      * 批量移除数据
      */
-    fun removeAll(elements: Collection<BasicsLong>) {
+    fun removeAll(elements: Collection<BasicLong>) {
         elements.forEach(::removeElement)
     }
 
@@ -278,6 +308,37 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
     override fun toString(): String {
         return "[" + toLongArray().joinToString(",") + "]"
     }
+
+    /**
+     * 包装类型迭代器
+     */
+    inner class LongMutableIterator : MutableIterator<BasicLong> {
+        private var index = 0
+        override fun hasNext(): Boolean = size > index
+        override fun next(): BasicLong = get(index++)
+        override fun remove() = removeAtIndex(--index)
+    }
+
+    /**
+     * 基础类型迭代器
+     */
+    inner class BasicLongMutableIterator {
+        private var index = 0
+        fun hasNext(): Boolean = size > index
+        fun next(): BasicLong = get(index++)
+        fun remove() = removeAtIndex(--index)
+    }
+
+    /**
+     * 基础类型的lambda
+     */
+    fun interface OnBasicLong {
+        fun onBasicLong(basicLong: BasicLong)
+    }
+
+    fun interface OnBasicLongWithIndex {
+        fun onBasicLongWithIndex(index: Int, basicLong: BasicLong)
+    }
 }
 
-fun longArrayListOf(vararg elements: BasicsLong): LongArrayList = LongArrayList(elements)
+fun longArrayListOf(vararg elements: BasicLong): LongArrayList = LongArrayList(elements)
