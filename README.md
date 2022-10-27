@@ -65,6 +65,13 @@ SortedAndNotRepeatList
 DownTimeMap
 ```
 
+## 在服务器中有时效性的数据内存缓存
+
+```kotlin
+TimeCacheData
+TimeCacheDataMap
+```
+
 ## kotlin的Pair数量不够用怎么办?用下面的
 
 ```kotlin
