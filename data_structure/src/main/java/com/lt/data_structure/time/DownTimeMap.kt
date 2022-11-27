@@ -61,4 +61,16 @@ class DownTimeMap<K : Any, V>(
         pair?.first?.cancel()
         return pair?.second
     }
+
+    /**
+     * 获取key的集合
+     */
+    val keys: List<K>
+        get() = map.keys.toList()
+
+    /**
+     * 获取value集合
+     */
+    val values: List<V>
+        get() = map.values.map { it.second }
 }
