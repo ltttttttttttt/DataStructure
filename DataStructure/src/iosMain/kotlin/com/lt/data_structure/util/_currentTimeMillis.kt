@@ -19,4 +19,4 @@ package com.lt.data_structure.util
 /**
  * 获取当前时间戳
  */
-actual fun _currentTimeMillis(): Long = TODO()
+actual fun _currentTimeMillis(): Long = (Date().timeIntervalSince1970 * 1000).toLong

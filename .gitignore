@@ -69,3 +69,5 @@ jiagu_apks_output/
 
 # vscode
 .vscode/
+
+secring.gpg

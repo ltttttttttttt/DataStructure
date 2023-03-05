@@ -16,8 +16,6 @@
 
 package com.lt.data_structure.lru
 
-import java.util.*
-
 /**
  * creator: lt  2020/12/19  lt.dygzs@qq.com
  * effect : Lru算法的Map,get方法效率较put高
