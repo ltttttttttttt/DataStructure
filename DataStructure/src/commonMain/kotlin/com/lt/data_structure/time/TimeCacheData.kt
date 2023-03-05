@@ -16,6 +16,7 @@
 
 package com.lt.data_structure.time
 
+import com.lt.data_structure.util._currentTimeMillis
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -65,10 +66,10 @@ open class TimeCacheData<T>(
      */
     private suspend fun checkAndGetDataWithNoMutex(newDataLambda: suspend () -> T): T {
         val oldData = data
-        return if (oldData == null || System.currentTimeMillis() - time >= cacheTime * 60000) {
+        return if (oldData == null || _currentTimeMillis() - time >= cacheTime * 60000) {
             val newData = newDataLambda()
             data = newData
-            time = System.currentTimeMillis()
+            time = _currentTimeMillis()
             newData
         } else {
             oldData

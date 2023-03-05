@@ -16,8 +16,6 @@
 
 package com.lt.data_structure.lru
 
-import java.util.*
-
 /**
  * creator: lt  2020/12/19  lt.dygzs@qq.com
  * effect : Lru算法的Map,get方法效率较put高
@@ -30,4 +28,4 @@ import java.util.*
  * [loadFactor]散列比例,越小内部数组就越大,hash碰撞的概率就越小,大于1后必定会发生hash碰撞,参考HashMap,需要注意maxSize要大于0,否则抛异常
  * [valueFactory]如果使用[LruMapWithGetFirst.getOrCreate]则需要使用该方法来创建默认的value对象
  */
-expect open class LruMapWithGetFirst<K, V>
+actual open class LruMapWithGetFirst<K, V>

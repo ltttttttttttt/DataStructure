@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package com.lt.data_structure.time
+package com.lt.data_structure.util
 
 /**
- * creator: lt  2022/7/6  lt.dygzs@qq.com
- * effect : 会根据倒计时自动移除数据的map
- * warning:
- * [downTime]倒计时多少毫秒自动移除数据
+ * 获取当前时间戳
  */
-expect class DownTimeMap<K : Any, V>
+actual fun _currentTimeMillis(): Long = TODO()

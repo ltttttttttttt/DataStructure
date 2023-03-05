@@ -22,4 +22,4 @@ package com.lt.data_structure.time
  * warning:
  * [downTime]倒计时多少毫秒自动移除数据
  */
-expect class DownTimeMap<K : Any, V>
+actual class DownTimeMap<K : Any, V>

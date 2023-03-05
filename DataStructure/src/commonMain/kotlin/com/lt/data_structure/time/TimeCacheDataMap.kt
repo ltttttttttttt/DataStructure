@@ -16,6 +16,7 @@
 
 package com.lt.data_structure.time
 
+import com.lt.data_structure.util._currentTimeMillis
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -76,10 +77,10 @@ open class TimeCacheDataMap<K : Any, V>(
         val value = dataMap.getOrPut(key) { TimeAndValue() }
         val time = value.time
         val oldData = value.value
-        return if (oldData == null || System.currentTimeMillis() - time >= cacheTime * 60000) {
+        return if (oldData == null || _currentTimeMillis() - time >= cacheTime * 60000) {
             val newData = newDataLambda(key)
             value.value = newData
-            value.time = System.currentTimeMillis()
+            value.time = _currentTimeMillis()
             newData
         } else {
             oldData
