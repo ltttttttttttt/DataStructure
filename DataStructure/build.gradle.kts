@@ -24,7 +24,7 @@ plugins {
 group = "io.github.ltttttttttttt"
 //上传到mavenCentral命令: ./gradlew publishAllPublicationsToSonatypeRepository
 //mavenCentral后台: https://s01.oss.sonatype.org/#stagingRepositories
-version = "1.0.9"
+version = "1.0.11"
 
 kotlin {
     android {
