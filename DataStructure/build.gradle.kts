@@ -18,13 +18,13 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("convention.publication")
-//    kotlin("native.cocoapods")
+    kotlin("native.cocoapods")
 }
 
 group = "io.github.ltttttttttttt"
 //上传到mavenCentral命令: ./gradlew publishAllPublicationsToSonatypeRepository
 //mavenCentral后台: https://s01.oss.sonatype.org/#stagingRepositories
-version = "1.0.11"
+version = "1.0.12"
 
 kotlin {
     android {
@@ -61,17 +61,17 @@ kotlin {
 //        }
 //    }
 //
-//    cocoapods {
-//        summary = "Jatpack(JetBrains) Compose views"
-//        homepage = "https://github.com/ltttttttttttt/ComposeViews"
-//        ios.deploymentTarget = "14.1"
-//        podfile = project.file("../ios_app/Podfile")
-//        framework {
-//            baseName = "ComposeViews"
-//            isStatic = true
-//        }
-//        extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/desktopMain/resources/**', 'src/iosMain/resources/**']"
-//    }
+    cocoapods {
+        summary = "DataStructure"
+        homepage = "https://github.com/ltttttttttttt/DataStructure"
+        ios.deploymentTarget = "14.1"
+        //podfile = project.file("../ios_app/Podfile")
+        framework {
+            baseName = "DataStructure"
+            isStatic = true
+        }
+        extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/desktopMain/resources/**', 'src/iosMain/resources/**']"
+    }
 
     sourceSets {
         val commonMain by getting {

@@ -16,12 +16,12 @@
 
 buildscript {
     repositories {
-        maven("https://jitpack.io")
         maven("https://mirrors.tencent.com/nexus/repository/maven-public/")
         google()
         gradlePluginPortal()
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven("https://jitpack.io")
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.0")
@@ -34,11 +34,11 @@ version = "1.0.0"
 
 allprojects {
     repositories {
-        maven("https://jitpack.io")
         maven("https://mirrors.tencent.com/nexus/repository/maven-public/")
         google()
         gradlePluginPortal()
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven("https://jitpack.io")
     }
 }
