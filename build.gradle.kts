@@ -14,24 +14,31 @@
  * limitations under the License.
  */
 
-plugins {
-    id("java")
+buildscript {
+    repositories {
+        maven("https://mirrors.tencent.com/nexus/repository/maven-public/")
+        google()
+        gradlePluginPortal()
+        mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven("https://jitpack.io")
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:7.2.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0")
+    }
 }
 
-group = "com.lt"
-version = "1.0"
+group = "com.github.ltttttttttttt"
+version = "1.0.0"
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation(project(":data_structure"))
-
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
-}
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
+allprojects {
+    repositories {
+        maven("https://mirrors.tencent.com/nexus/repository/maven-public/")
+        google()
+        gradlePluginPortal()
+        mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven("https://jitpack.io")
+    }
 }

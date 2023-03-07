@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
+package com.lt.data_structure.util
 
-rootProject.name = "DataStructure"
-include("app")
-include("DataStructure")
+import platform.Foundation.NSDate
+import platform.Foundation.timeIntervalSince1970
 
-includeBuild("convention-plugins")
+/**
+ * 获取当前时间戳(ms)
+ */
+actual fun _currentTimeMillis(): Long = NSDate().timeIntervalSince1970().toLong()

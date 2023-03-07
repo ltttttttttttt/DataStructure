@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
+package com.lt.data_structure.util
 
-rootProject.name = "DataStructure"
-include("app")
-include("DataStructure")
-
-includeBuild("convention-plugins")
+/**
+ * 获取当前时间戳
+ */
+actual fun _currentTimeMillis(): Long = System.currentTimeMillis()

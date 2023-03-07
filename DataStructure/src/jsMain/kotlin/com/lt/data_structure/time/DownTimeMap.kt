@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
+package com.lt.data_structure.time
 
-rootProject.name = "DataStructure"
-include("app")
-include("DataStructure")
-
-includeBuild("convention-plugins")
+/**
+ * creator: lt  2022/7/6  lt.dygzs@qq.com
+ * effect : 会根据倒计时自动移除数据的map
+ * warning:
+ * [downTime]倒计时多少毫秒自动移除数据
+ */
+actual class DownTimeMap<K : Any, V>

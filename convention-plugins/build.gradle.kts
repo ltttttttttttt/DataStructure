@@ -1,5 +1,5 @@
 /*
- * Copyright lt 2022
+ * Copyright lt 2023
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
+plugins {
+    `kotlin-dsl` // Is needed to turn our build logic written in Kotlin into the Gradle Plugin
+}
 
-rootProject.name = "DataStructure"
-include("app")
-include("DataStructure")
-
-includeBuild("convention-plugins")
+repositories {
+    gradlePluginPortal() // To use 'maven-publish' and 'signing' plugins in our own plugin
+}
