@@ -4,6 +4,8 @@ Common user-defined data structures(常用的自定义的数据结构)
 
 Applicable Kotlin all target(适用于kotlin全平台)
 
+<img src="https://img.shields.io/badge/Kotlin-Multiplatform-%237f52ff?logo=kotlin">
+
 ## Add to your project(如何添加到你的项目中)
 
 Your app dir, build.gradle.kts add:(在你app目录的build.gradle.kts中添加)
