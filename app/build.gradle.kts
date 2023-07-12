@@ -50,6 +50,7 @@ android {
 
 dependencies {
     implementation(project(":DataStructure"))
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     implementation("com.android.support:appcompat-v7:28.0.0")
     implementation("com.android.support.constraint:constraint-layout:2.0.4")
