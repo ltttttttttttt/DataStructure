@@ -24,7 +24,7 @@ private typealias BasicDouble = Double
  * warning:[initSize]初始化容量
  * ps:json无法转化成[],但可以调用toString()
  */
-class DoubleArrayList(initSize: Int = 10) : RandomAccess {
+class DoubleArrayList(initSize: Int = 0) : RandomAccess {
     constructor(doubleArray: DoubleArray) : this(doubleArray.size) {
         data = doubleArray.copyOf()
         size = data.size
@@ -84,7 +84,7 @@ class DoubleArrayList(initSize: Int = 10) : RandomAccess {
      */
     fun add(element: BasicDouble) {
         if (size == data.size)
-            data = data.copyOf(data.size * 2)
+            data = data.copyOf(if (data.isEmpty()) 10 else data.size * 2)
         data[size] = element
         size++
     }

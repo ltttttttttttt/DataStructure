@@ -24,7 +24,7 @@ private typealias BasicFloat = Float
  * warning:[initSize]初始化容量
  * ps:json无法转化成[],但可以调用toString()
  */
-class FloatArrayList(initSize: Int = 10) : RandomAccess {
+class FloatArrayList(initSize: Int = 0) : RandomAccess {
     constructor(floatArray: FloatArray) : this(floatArray.size) {
         data = floatArray.copyOf()
         size = data.size
@@ -84,7 +84,7 @@ class FloatArrayList(initSize: Int = 10) : RandomAccess {
      */
     fun add(element: BasicFloat) {
         if (size == data.size)
-            data = data.copyOf(data.size * 2)
+            data = data.copyOf(if (data.isEmpty()) 10 else data.size * 2)
         data[size] = element
         size++
     }

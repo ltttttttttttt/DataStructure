@@ -80,7 +80,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 " * warning:[initSize]初始化容量\n" +
                 " * ps:json无法转化成[],但可以调用toString()\n" +
                 " */\n" +
-                "class ${basic}ArrayList(initSize: Int = 10) : RandomAccess {\n" +
+                "class ${basic}ArrayList(initSize: Int = 0) : RandomAccess {\n" +
                 "    constructor(${lowerBasic}Array: ${basic}Array) : this(${lowerBasic}Array.size) {\n" +
                 "        data = ${lowerBasic}Array.copyOf()\n" +
                 "        size = data.size\n" +
@@ -140,7 +140,7 @@ fun createKtFile(basicInfo: BasicInfo, file: File) {
                 "     */\n" +
                 "    fun add(element: Basic${basic}) {\n" +
                 "        if (size == data.size)\n" +
-                "            data = data.copyOf(data.size * 2)\n" +
+                "            data = data.copyOf(if (data.isEmpty()) 10 else data.size * 2)\n" +
                 "        data[size] = element\n" +
                 "        size++\n" +
                 "    }\n" +

@@ -24,7 +24,7 @@ private typealias BasicBoolean = Boolean
  * warning:[initSize]初始化容量
  * ps:json无法转化成[],但可以调用toString()
  */
-class BooleanArrayList(initSize: Int = 10) : RandomAccess {
+class BooleanArrayList(initSize: Int = 0) : RandomAccess {
     constructor(booleanArray: BooleanArray) : this(booleanArray.size) {
         data = booleanArray.copyOf()
         size = data.size
@@ -84,7 +84,7 @@ class BooleanArrayList(initSize: Int = 10) : RandomAccess {
      */
     fun add(element: BasicBoolean) {
         if (size == data.size)
-            data = data.copyOf(data.size * 2)
+            data = data.copyOf(if (data.isEmpty()) 10 else data.size * 2)
         data[size] = element
         size++
     }

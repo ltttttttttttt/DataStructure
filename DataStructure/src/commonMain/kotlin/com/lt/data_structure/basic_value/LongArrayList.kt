@@ -24,7 +24,7 @@ private typealias BasicLong = Long
  * warning:[initSize]初始化容量
  * ps:json无法转化成[],但可以调用toString()
  */
-class LongArrayList(initSize: Int = 10) : RandomAccess {
+class LongArrayList(initSize: Int = 0) : RandomAccess {
     constructor(longArray: LongArray) : this(longArray.size) {
         data = longArray.copyOf()
         size = data.size
@@ -84,7 +84,7 @@ class LongArrayList(initSize: Int = 10) : RandomAccess {
      */
     fun add(element: BasicLong) {
         if (size == data.size)
-            data = data.copyOf(data.size * 2)
+            data = data.copyOf(if (data.isEmpty()) 10 else data.size * 2)
         data[size] = element
         size++
     }
