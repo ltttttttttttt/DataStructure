@@ -25,7 +25,8 @@ import java.util.concurrent.ConcurrentHashMap
 /**
  * creator: lt  2022/7/6  lt.dygzs@qq.com
  * effect : 会根据倒计时自动移除数据的map
- * warning:
+ * warning: 内部使用ConcurrentHashMap
+            线程安全
  * [downTime]倒计时多少毫秒自动移除数据
  */
 actual class DownTimeMap<K : Any, V>(
