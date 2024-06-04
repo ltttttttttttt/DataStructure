@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+
 /*
  * Copyright lt 2022
  *
@@ -46,6 +49,23 @@ kotlin {
         browser()
     }
 
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        moduleName = "DataStructure"
+        browser {
+            commonWebpackConfig {
+                outputFileName = "DataStructure.js"
+                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                    static = (static ?: mutableListOf()).apply {
+                        // Serve sources to debug inside browser
+                        add(project.projectDir.path)
+                    }
+                }
+            }
+        }
+        binaries.executable()
+    }
+
 //    macosX64 {
 //        binaries {
 //            executable {
@@ -79,7 +99,7 @@ kotlin {
                 //kotlin
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
                 //协程
-                implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
             }
         }
         val commonTest by getting {
@@ -89,8 +109,7 @@ kotlin {
         }
 
         val androidMain by getting
-        val androidTest by getting
-//        val androidUnitTest by getting
+        val androidUnitTest by getting
 
         val desktopMain by getting
         val desktopTest by getting
@@ -102,6 +121,16 @@ kotlin {
         }
         val iosSimulatorArm64Test by getting {
             dependsOn(iosTest)
+        }
+
+        val jsMain by getting {
+            dependencies {
+            }
+        }
+
+        val wasmJsMain by getting {
+            dependencies {
+            }
         }
 
 //        val macosMain by creating {
@@ -125,7 +154,7 @@ android {
         sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
