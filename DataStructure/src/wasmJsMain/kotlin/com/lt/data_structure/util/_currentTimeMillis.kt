@@ -16,10 +16,18 @@
 
 package com.lt.data_structure.util
 
-//import kotlin.js.Date
+
+external class JsDate {
+    companion object {
+        fun now(): Double
+    }
+}
+
+fun getCurrentTimestamp(): Double {
+    return JsDate.now()
+}
 
 /**
  * 获取当前时间戳
  */
-//todo 获取时间戳
-actual fun _currentTimeMillis(): Long = 0L//Date.now().toLong()
+actual fun _currentTimeMillis(): Long = getCurrentTimestamp().toLong()
