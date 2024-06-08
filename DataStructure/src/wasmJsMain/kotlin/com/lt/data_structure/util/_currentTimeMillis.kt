@@ -17,14 +17,14 @@
 package com.lt.data_structure.util
 
 
-external class JsDate {
+external class Date {
     companion object {
         fun now(): Double
     }
 }
 
 fun getCurrentTimestamp(): Double {
-    return JsDate.now()
+    return Date.now()
 }
 
 /**
