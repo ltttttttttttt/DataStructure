@@ -226,7 +226,7 @@ actual open class LruMapWithGetFirst<K, V>(
     /**
      * 获取对象的hash值
      */
-    protected open fun hash(any: Any?): Int = any?.hashCode() ?: 0
+    protected open fun hash(any: Any?): Int = abs(any?.hashCode() ?: 0)
 
     /**
      * 根据hash和maxSize获取索引
