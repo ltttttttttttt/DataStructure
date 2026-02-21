@@ -17,6 +17,7 @@
 package com.lt.data_structure.lru
 
 import java.util.concurrent.atomic.AtomicLong
+import kotlin.math.abs
 
 /**
  * creator: lt  2020/12/19  lt.dygzs@qq.com
